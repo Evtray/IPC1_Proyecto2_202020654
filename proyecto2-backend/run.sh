@@ -1,1 +1,1 @@
-python3 -m uvicorn app:app
+python3 -m uvicorn app:app --reload
