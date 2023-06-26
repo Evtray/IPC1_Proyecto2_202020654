@@ -1,10 +1,11 @@
 import React from "react";
+import Header from "../../helpers/Header";
 import './MainView.scss';
 
 const MainView = () => {
     return(
         <div className="main-view-component">
-            main view
+            <Header title="Main View"/>
         </div>
     )
 
