@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../../helpers/Header";
 import './MainView.scss';
 import Blog from "../../components/blog/Blog";
 
