@@ -1,5 +1,11 @@
+@import './variables.scss';
+
 .App {
   text-align: center;
+  font-size: $default-font-size;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -35,4 +41,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  font-size: $default-font-size;
 }
