@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,7 +17,6 @@ import { logoutUser } from '../../api';
 import { useDispatch } from 'react-redux';
 import showToast from '../../helpers/showToast'
 
-const pages = ['Películas', 'Mi Playlist'];
 const settings = ['Mi cuenta', 'Cerrar sesión'];
 
 function MainMenu() {
@@ -26,6 +25,17 @@ function MainMenu() {
     const AUTH = useSelector(state => state.auth);
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [pages, setPages] = useState(['Películas']);
+
+    useEffect(() => {
+        let isAdmin = AUTH?.user?.is_admin;
+        if(AUTH)
+        if(!isAdmin) {
+            setPages(['Películas', 'Mi Playlist']);
+        } else {
+            setPages(['Películas', 'Mi Playlist', 'Usuarios', 'Administrar Películas']);
+        }
+    }, [AUTH]);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
