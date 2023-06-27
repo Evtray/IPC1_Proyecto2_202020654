@@ -13,6 +13,7 @@ import Footer from './Footer';
 import post1 from './blog-post.1.md';
 import post2 from './blog-post.2.md';
 import post3 from './blog-post.3.md';
+import { useNavigate } from 'react-router-dom';
 
 const sections = [];
 
@@ -71,11 +72,17 @@ const sidebar = {
 const defaultTheme = createTheme();
 
 export default function Blog() {
+  let navigate = useNavigate();
+
+  function onLogin() {
+    navigate('login');
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Películas" sections={sections} />
+        <Header title="Películas" sections={sections} onLogin={onLogin}/>
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>

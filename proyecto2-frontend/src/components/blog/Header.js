@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
 function Header(props) {
-  const { sections, title } = props;
+  const { sections, title, onLogin } = props;
 
   return (
     <React.Fragment>
@@ -25,7 +25,7 @@ function Header(props) {
         </Typography>
         <IconButton>
         </IconButton>
-        <Button variant="outlined" size="small">
+        <Button variant="outlined" size="small" onClick={() => onLogin()}>
           Iniciar sesión
         </Button>
       </Toolbar>
