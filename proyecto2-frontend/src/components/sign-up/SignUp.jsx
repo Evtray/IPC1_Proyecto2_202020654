@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,21 +12,53 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { createUser } from '../../apiCalls';
+import showToast from '../../helpers/showToast' 
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   let navigate = useNavigate();
-
   function onLogin() {
     navigate('/login');
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
+      firstname: data.get('firstName'),
+      lastname: data.get('lastName'),
+    });
+    let userParams = {
+      username: data.get('username'),
+      password: data.get('password'),
+      name: data.get('firstName'),
+      lastname: data.get('lastName'),
+      is_admin: false,
+    }
+    if(userParams.username === '' || userParams.password === '' || userParams.name === '' || userParams.lastname === '') {
+      showToast('error', 'Todos los campos son obligatorios');
+      return;
+    }
+    createUser(userParams).then((response) => {
+      console.log(response);
+      if (response.status === 201) {
+        showToast('success', 'Usuario creado correctamente');
+        navigate('/login');
+      } else {
+        showToast('error', 'Error al crear usuario');
+      }
+    }).catch((error) => {
+      console.log(error);
+      if(error.response.status === 400) {
+        showToast('error', 'El nombre de usuario ya existe');
+      } else {
+        showToast('error', 'Error al crear usuario');
+      }
+
     });
   };
 
@@ -74,10 +107,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Correo electrónico"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Nombre de usuario"
+                  name="username"
+                  autoComplete="username"
                 />
               </Grid>
               <Grid item xs={12}>
