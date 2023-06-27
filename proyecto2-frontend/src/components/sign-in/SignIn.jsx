@@ -12,10 +12,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  let navigate = useNavigate();
+
+  function onSignUp() {
+    navigate('/signup');
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,13 +85,13 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link variant="body2">
                   ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  ¿No tienes una cuenta? Regístrate
+                <Link variant="body2" onClick={() => onSignUp()}>
+                  Regístrate aquí
                 </Link>
               </Grid>
             </Grid>
