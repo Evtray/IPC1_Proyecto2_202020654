@@ -6,7 +6,6 @@ from models.movie import Movie
 from bson import ObjectId
 from datetime import datetime
 
-
 movie_router = APIRouter()
 
 # Specify the database
@@ -57,7 +56,7 @@ def get_movies(movie_id: str = Query(None)):
             }
         }
     ]
-    
+
     if query:
         pipeline.insert(0, {"$match": query})
 
@@ -77,3 +76,34 @@ def create_movie(movie: Movie):
 
     # Convert the movie entity and return it
     return movieEntity(created_movie)
+
+@movie_router.put("/movies/update/{movie_id}")
+def update_movie(movie_id: str, movie: Movie):
+    movie_id = ObjectId(movie_id)
+    update_fields = {}
+
+    if movie.name is not None:
+        update_fields["name"] = movie.name
+    if movie.description is not None:
+        update_fields["description"] = movie.description
+    if movie.genre is not None:
+        update_fields["genre"] = movie.genre
+    if movie.MDA is not None:
+        update_fields["MDA"] = movie.MDA
+    if movie.year is not None:
+        update_fields["year"] = movie.year
+    if movie.duration is not None:
+        update_fields["duration"] = movie.duration
+
+    if update_fields:
+        db.movies.update_one({"_id": movie_id}, {"$set": update_fields})
+
+    return movieEntity(db.movies.find_one({"_id": movie_id}))
+
+@movie_router.delete("/movies/{movie_id}")
+def delete_movie(movie_id: str):
+    result = db.movies.delete_one({"_id": ObjectId(movie_id)})
+    if result.deleted_count == 1:
+        return {"message": "Movie deleted successfully"}
+    else:
+        return {"message": "Movie not found"}
