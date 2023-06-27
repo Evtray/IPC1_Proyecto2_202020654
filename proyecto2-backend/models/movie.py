@@ -1,12 +1,13 @@
 from typing import Optional, List
 from pydantic import BaseModel
-
+from models.comment import Comment
 
 class Movie(BaseModel):
     id: Optional[str]
-    src: str
+    name: str
+    description: str
     genre: str
-    MPA: str
-    year: int
-    duration: int
-    comments: List['comment.Comment']
+    MDA: str
+    year: str
+    duration: str
+    comments: Optional[List[Comment]] = []
