@@ -1,0 +1,9 @@
+.movies-list-component-container {
+    padding: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    overflow-y: auto;
+    height: calc(100vh - 120px);
+    justify-content: space-between;
+}

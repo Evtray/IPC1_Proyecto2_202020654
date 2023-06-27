@@ -5,6 +5,8 @@ def movieEntity(item) -> dict:
         "id": str(item["_id"]),
         "name": item["name"],
         "description": item["description"],
+        "src": item["src"],
+        "preview": item["preview"],
         "genre": item["genre"],
         "MDA": item["MDA"],
         "year": item["year"],

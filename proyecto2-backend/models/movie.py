@@ -6,6 +6,8 @@ class Movie(BaseModel):
     id: Optional[str]
     name: str
     description: str
+    src: str
+    preview: str
     genre: str
     MDA: str
     year: str

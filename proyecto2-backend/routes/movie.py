@@ -36,6 +36,8 @@ def get_movies(movie_id: str = Query(None)):
                 "_id": 1,
                 "name": 1,
                 "description": 1,
+                "src": 1,
+                "preview": 1,
                 "genre": 1,
                 "MDA": 1,
                 "year": 1,
