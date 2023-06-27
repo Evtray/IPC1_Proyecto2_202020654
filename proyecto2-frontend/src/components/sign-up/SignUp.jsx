@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from '../../apiCalls';
+import { createUser } from '../../api';
 import showToast from '../../helpers/showToast' 
 
 const defaultTheme = createTheme();
@@ -45,15 +45,11 @@ export default function SignUp() {
     }
     createUser(userParams).then((response) => {
       console.log(response);
-      if (response.status === 201) {
-        showToast('success', 'Usuario creado correctamente');
-        navigate('/login');
-      } else {
-        showToast('error', 'Error al crear usuario');
-      }
+      showToast('success', 'Usuario creado correctamente');
+      navigate('/login');
     }).catch((error) => {
       console.log(error);
-      if(error.response.status === 400) {
+      if(error?.response?.status === 400) {
         showToast('error', 'El nombre de usuario ya existe');
       } else {
         showToast('error', 'Error al crear usuario');

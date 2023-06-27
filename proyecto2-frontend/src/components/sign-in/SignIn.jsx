@@ -13,11 +13,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../api/users';
+import showToast from '../../helpers/showToast' 
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   function onSignUp() {
     navigate('/signup');
@@ -29,6 +34,12 @@ export default function SignIn() {
     console.log({
       username: data.get('username'),
       password: data.get('password'),
+    });
+    dispatch(loginUser(data.get('username'), data.get('password'))).then(() => {
+      navigate('/dashboard');
+    }).catch((error) => {
+      console.log(error);
+      showToast('error', 'Error al iniciar sesión, verifica tus datos');
     });
   };
 
@@ -70,10 +81,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recordarme"
             />
             <Button
               type="submit"
