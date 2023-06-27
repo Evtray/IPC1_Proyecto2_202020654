@@ -35,7 +35,6 @@ function Footer(props) {
         >
           {description}
         </Typography>
-        <Copyright />
       </Container>
     </Box>
   );
