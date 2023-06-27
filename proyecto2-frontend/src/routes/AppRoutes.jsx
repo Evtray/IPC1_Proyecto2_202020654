@@ -5,10 +5,12 @@ import LoginView from '../views/LoginView/LoginView';
 import SignUpView from '../views/SignUpView/SignUpView';
 import ProtectedRoute from './ProtectedRoute';
 import DashboardView from '../views/DashboardView/DashboardView';
+import MainMenu from '../components/mainMenu/MainMenu';
 
 const AppRoutes = () => {
   return (
     <Router>
+      <MainMenu /> 
       <Routes>
         <Route path="/" element={<MainView />} />
         <Route path="/login" element={<LoginView />} />

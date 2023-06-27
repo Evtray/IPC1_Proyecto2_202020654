@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../api/users';
+import { loginUser } from '../../api/index';
 import showToast from '../../helpers/showToast' 
 
 const defaultTheme = createTheme();

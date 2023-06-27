@@ -24,3 +24,13 @@ export const loginUser = (username, password) => dispatch => {
         throw new Error(error.message);
       });
   };
+
+  export const logoutUser = (token) => (dispatch) => {
+    return axiosInstance.post(`/users/logout?token=${token}`).then(() => {
+        dispatch({ type: 'LOGOUT' }); // Dispatch the LOGOUT action to set login status to false
+        dispatch({ type: 'SET_AUTH', payload: null }); // Clear the auth state by setting it to null
+      }).catch((error) => {
+        console.error('Logout failed:', error);
+      });
+  };
+  
