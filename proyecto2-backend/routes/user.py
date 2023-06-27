@@ -74,7 +74,7 @@ def login(username: str, password: str):
             "timestamp": datetime.now()
         }
         db.userTokens.insert_one(token_data)  # Save token data in userTokens collection
-        return {"message": "Login successful", "token": token}
+        return {"message": "Login successful", "token": token, "user": userEntity(user)}
     else:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 

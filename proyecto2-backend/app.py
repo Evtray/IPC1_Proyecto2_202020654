@@ -12,7 +12,6 @@ origins = [
     "http://localhost:3000",
     "http://example.com",
     "http://example.com:8080",
-    # Add more allowed origins as needed
 ]
 
 # Add the CORS middleware to the application
@@ -24,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include your routers
+# Included routers
 app.include_router(user_router)
 app.include_router(comment_router)
 app.include_router(movie_router)
