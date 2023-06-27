@@ -78,6 +78,14 @@ def login(username: str, password: str):
     else:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
+@user_router.post("/users/logout")
+def logout(token: str):
+    deleted_count = db.userTokens.delete_one({"token": token}).deleted_count
+    if deleted_count:
+        return {"message": "Logout successful"}
+    else:
+        raise HTTPException(status_code=404, detail="Token not found")
+
 # Helper function to hash the password
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
