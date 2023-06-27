@@ -33,4 +33,8 @@ export const loginUser = (username, password) => dispatch => {
         console.error('Logout failed:', error);
       });
   };
+
+  export const recoverPassword = (username) => {
+    return axiosInstance.put(`/users/recover-password?username=${username}`);
+  }
   

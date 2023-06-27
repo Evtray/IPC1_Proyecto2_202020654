@@ -33,7 +33,7 @@ function MainMenu() {
         if(!isAdmin) {
             setPages(['Películas', 'Mi Playlist']);
         } else {
-            setPages(['Películas', 'Mi Playlist', 'Usuarios', 'Administrar Películas']);
+            setPages(['Crear película', 'Usuarios', 'Administrar Películas']);
         }
     }, [AUTH]);
 

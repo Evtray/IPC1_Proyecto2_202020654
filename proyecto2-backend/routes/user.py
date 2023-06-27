@@ -93,3 +93,13 @@ def hash_password(password: str) -> str:
 # Helper function to verify the password
 def verify_password(password: str, hashed_password: str) -> bool:
     return pwd_context.verify(password, hashed_password)
+
+@user_router.put("/users/recover-password")
+def recover_password(username: str):
+    user = db.user.find_one({"username": username})
+    if user:
+        hashed_password = hash_password("cambiar123")  # Hash the new password
+        db.user.update_one({"_id": user["_id"]}, {"$set": {"password": hashed_password}})
+        return {"message": "Password recovered successfully. New password: cambiar123"}
+    else:
+        raise HTTPException(status_code=404, detail="User not found")

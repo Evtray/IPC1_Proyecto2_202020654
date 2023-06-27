@@ -1,10 +1,14 @@
 import React from "react";
 import MoviesList from "../../components/moviesList/MoviesList";
+import { useSelector } from 'react-redux';
 
 const DashboardView = () => {
+    const MOVIES = useSelector(state => state.movies);
     return(
         <div className="dashboard-view-container">
-            <MoviesList list={[1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,3]}/>
+            {
+                MOVIES.loading ? <h1>Cargando...</h1> : <MoviesList list={MOVIES.movies}/>
+            }
         </div>
     );
 };

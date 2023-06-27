@@ -6,6 +6,7 @@ import SignUpView from '../views/SignUpView/SignUpView';
 import ProtectedRoute from './ProtectedRoute';
 import DashboardView from '../views/DashboardView/DashboardView';
 import MainMenu from '../components/mainMenu/MainMenu';
+import RecoverPasswordView from '../views/RecoverPasswordView/RecoverPassword';
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/" element={<MainView />} />
         <Route path="/login" element={<LoginView />} />
         <Route path="/signup" element={<SignUpView />} />
+        <Route path="/recover-password" element={<RecoverPasswordView />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardView />} />
         </Route>

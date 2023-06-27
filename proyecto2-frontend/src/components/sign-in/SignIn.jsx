@@ -28,6 +28,10 @@ export default function SignIn() {
     navigate('/signup');
   }
 
+  function onRecoverPassword() {
+    navigate('/recover-password');
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -92,7 +96,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link variant="body2">
+                <Link variant="body2" onClick={() => onRecoverPassword()}>
                   ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
