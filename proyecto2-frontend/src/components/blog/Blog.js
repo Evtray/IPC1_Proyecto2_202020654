@@ -22,7 +22,7 @@ const mainFeaturedPost = {
   title: 'Pelis',
   description:
     "Mira películas sin limites ni restricciones",
-  image: 'https://source.unsplash.com/random?wallpapers',
+  image: 'https://source.unsplash.com/random?movie',
   imageText: 'main image description',
 };
 
@@ -31,14 +31,14 @@ const featuredPosts = [
     title: 'Crea una playlist',
     description:
       'Busca películas que deseas y agrégalas para ver cuando quieras',
-    image: 'https://source.unsplash.com/random?wallpapers',
+    image: 'https://source.unsplash.com/random?movie',
     imageLabel: 'Image Text',
   },
   {
     title: 'Comenta las películas',
     description:
       'publica lo que opinas de las películas luego de verlas',
-    image: 'https://source.unsplash.com/random?wallpapers',
+    image: 'https://source.unsplash.com/random?movie',
     imageLabel: 'Image Text',
   },
 ];
