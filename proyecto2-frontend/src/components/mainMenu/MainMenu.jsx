@@ -78,7 +78,7 @@ function MainMenu() {
                 });
                 break;
             case 'Mi cuenta':
-                console.log('Mi cuenta');
+                navigate(`/my-account/${AUTH.user.id}`);
                 break;
             default:
                 break;

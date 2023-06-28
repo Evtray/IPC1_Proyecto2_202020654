@@ -42,10 +42,12 @@ def update_user(user_uid: str, user: User):
         update_fields["name"] = user.name
     if user.lastname is not None:
         update_fields["lastname"] = user.lastname
-    if user.password is not None:
-        update_fields["password"] = hash_password(user.password)  # Hash the password
     if user.username is not None:
         update_fields["username"] = user.username
+    
+    # Check if the fields exist in the request body before updating
+    if user.password is not None:
+        update_fields["password"] = hash_password(user.password)  # Hash the password
     if user.is_admin is not None:
         update_fields["is_admin"] = user.is_admin
 
@@ -53,6 +55,7 @@ def update_user(user_uid: str, user: User):
         db.user.update_one({"_id": user_id}, {"$set": update_fields})
 
     return userEntity(db.user.find_one({"_id": user_id}))
+
 
 @user_router.delete("/users/delete/{user_uid}")
 def delete_user(user_uid: str):

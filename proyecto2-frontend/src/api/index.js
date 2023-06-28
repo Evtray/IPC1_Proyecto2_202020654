@@ -5,6 +5,7 @@ export {
     recoverPassword,
     getUsers,
     deleteUser,
+    editUser,
 } from './users';
 
 export {

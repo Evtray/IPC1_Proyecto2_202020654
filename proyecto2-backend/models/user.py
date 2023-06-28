@@ -5,6 +5,6 @@ class User(BaseModel):
     id: Optional[str]
     name: str
     lastname: str
-    password: str
+    password: Optional[str]
     username: str
-    is_admin: bool
+    is_admin: Optional[bool]

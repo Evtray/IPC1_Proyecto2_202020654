@@ -45,3 +45,7 @@ export const getUsers = () => {
 export const deleteUser = (id) => {
   return axiosInstance.delete(`/users/delete/${id}`);
 }
+
+export const editUser = (id, data) => {
+  return axiosInstance.put(`/users/update/${id}`, data);
+}

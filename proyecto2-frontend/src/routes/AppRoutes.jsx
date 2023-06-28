@@ -11,6 +11,7 @@ import RecoverPasswordView from '../views/RecoverPasswordView/RecoverPassword';
 import CreateMovieView from '../views/CreateMovieView/CreateMovieView';
 import EditMovieView from '../views/EditMovieView/EditMovieView';
 import UsersTableView from '../views/UsersTableView/UsersTableView';
+import MyAccountView from '../views/MyAccountView/MyAccountView';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/recover-password" element={<RecoverPasswordView />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardView />} />
+          <Route path="/my-account/:id" element={<MyAccountView />} />
         </Route>
         <Route element={<AdminProtectedRoute />}>
           <Route path="/create-movie" element={<CreateMovieView />} />
