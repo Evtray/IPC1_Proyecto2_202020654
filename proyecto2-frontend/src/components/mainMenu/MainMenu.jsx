@@ -72,6 +72,9 @@ function MainMenu() {
             case 'Películas':
                 navigate('/dashboard');
                 break;
+            case 'Mi Playlist':
+                navigate('/playlist');
+                break;
             default:
                 break
         }
