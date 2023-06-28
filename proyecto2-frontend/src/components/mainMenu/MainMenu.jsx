@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useSelector } from 'react-redux';
-import { logoutUser } from '../../api';
+import { logoutUser, getUserMoviesPlaylist } from '../../api';
 import { useDispatch } from 'react-redux';
 import showToast from '../../helpers/showToast'
 import { useNavigate } from 'react-router-dom';
@@ -31,13 +31,21 @@ function MainMenu() {
 
     useEffect(() => {
         let isAdmin = AUTH?.user?.is_admin;
-        if(AUTH)
+        if(AUTH && IS_AUTHENTICATED)
         if(!isAdmin) {
             setPages(['Películas', 'Mi Playlist']);
+            if(AUTH?.user?.id) {
+                dispatch(getUserMoviesPlaylist(AUTH.user.id)).then((response) => {
+                    console.log(response);
+                }).catch((error) => {
+                    console.log(error);
+                    showToast('Ocurrió un error al obtener la playlist', 'error')
+                });
+            }
         } else {
             setPages(['Crear película', 'Administrar Películas', 'Usuarios']);
         }
-    }, [AUTH]);
+    }, [AUTH, IS_AUTHENTICATED]);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);

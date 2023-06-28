@@ -16,6 +16,7 @@ export default function MovieCard({key, movie}) {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const AUTH = useSelector(state => state.auth);
+  const USER_PLAYLIST = useSelector(state => state.userMoviesPlaylist);
 
   const onDeleteMovie = () => {
     console.log('delete', movie)
@@ -36,6 +37,10 @@ export default function MovieCard({key, movie}) {
     navigate(`/movie/${movie.id}`);
   }
 
+  const isInPlaylist = () => {
+    return USER_PLAYLIST.userMoviesPlaylist.some((item) => item.movie_uid === movie.id);
+  };
+
 
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -53,7 +58,13 @@ export default function MovieCard({key, movie}) {
         </Typography>
       </CardContent>
       <CardActions>
-        { !AUTH?.user?.is_admin && <Button size="small">Agregar a mi lista</Button> }
+        {
+          !AUTH?.user?.is_admin && 
+          (isInPlaylist(movie.id) ? 
+            <Button size="small" onClick={() => onViewMovie()}  color="error">Eliminar de mi playlist</Button> : 
+            <Button size="small" onClick={() => onViewMovie()}>Agregar a mi playlist</Button>
+          )
+        }
         <Button size="small" onClick={() => onViewMovie()}>Ver</Button>
         { AUTH?.user?.is_admin && <Button size="small" onClick={() => onEditMovie()}>Editar</Button> }
         { AUTH?.user?.is_admin && <Button size="small" onClick={() => onDeleteMovie()}>Eliminar</Button> }

@@ -15,3 +15,9 @@ export {
     updateMovie,
     publishComment,
 } from './movies';
+
+export {
+    getUserMoviesPlaylist,
+    addUserMovieToPlaylist,
+    removeUserMovieFromPlaylist,
+} from './playlist';
