@@ -7,9 +7,7 @@ export const createUser = (data) => {
 
 export const loginUser = (username, password) => dispatch => {
   dispatch({ type: 'LOGIN' }); // Dispatch the LOGIN action to set login status to true
-  return axiosInstance
-    .get(`/users/login?username=${username}&password=${password}`)
-    .then(response => {
+  return axiosInstance.get(`/users/login?username=${username}&password=${password}`).then(response => {
       // Dispatch the loginUserSuccess action with the response data
       dispatch(loginUserSuccess(response.data));
       // Dispatch an action to store the response in the auth reducer
@@ -30,6 +28,13 @@ export const logoutUser = (token) => (dispatch) => {
       dispatch({ type: 'LOGOUT' }); // Dispatch the LOGOUT action to set login status to false
       dispatch({ type: 'SET_AUTH', payload: null }); // Clear the auth state by setting it to null
     }).catch((error) => {
+
+
+
+
+
+
+      
       console.error('Logout failed:', error);
     });
 };

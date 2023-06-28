@@ -5,6 +5,7 @@ import showToast from '../../helpers/showToast';
 import { createMovie, updateMovie } from '../../api';
 import { useDispatch, useSelector} from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
+import Papa from 'papaparse';
 
 const CreateMovieForm = () => {
     const MOVIES = useSelector(state => state.movies);
@@ -26,7 +27,6 @@ const CreateMovieForm = () => {
     useEffect(() => {
         if (location.pathname.startsWith('/edit-movie/')) {
             setIsEditing(true);
-            console.log(id, 'id');
             const movies = MOVIES?.movies;
             const movie = movies?.find((movie) => movie.id === id);
             if (movie) {
@@ -59,7 +59,6 @@ const CreateMovieForm = () => {
         }
         if(isEditing) {
             // Update movie
-            console.log('formData', formData)
             dispatch(updateMovie(id, formData)).then(() => {
                 showToast('success', 'Película actualizada correctamente');
             }).catch((error) => {
@@ -85,6 +84,53 @@ const CreateMovieForm = () => {
         }
 
     };
+
+    const uploadMovies = () => {
+        console.log('uploadMovies');
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.csv';
+        fileInput.addEventListener('change', handleFileChange);
+        fileInput.click();
+      };
+      
+      const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = handleFileLoad;
+          reader.readAsText(file);
+        }
+      };
+      
+      const handleFileLoad = (event) => {
+        const fileContent = event.target.result;
+        const parsedData = Papa.parse(fileContent);
+        const csvData = parsedData.data;
+        csvData.splice(0, 1); 
+        try {
+            csvData.map((movie) => {
+                let newMovie = {}
+                newMovie.name = movie[0];
+                newMovie.genre = movie[1].substring(1);
+                newMovie.MDA = movie[2].substring(1);
+                newMovie.year = movie[3].substring(1);
+                newMovie.duration = movie[4].substring(1);
+                newMovie.src = movie[5].substring(1);
+                newMovie.preview = "No disponible";
+                newMovie.description = "No disponible";
+                dispatch(createMovie(newMovie)).then(() => {
+                    showToast('success', 'Película creada correctamente');
+                }).catch((error) => {
+                    showToast('error', 'Error al crear la película');
+                });
+            });            
+        } catch (error) {
+            console.log(error);
+            showToast('error', 'Error al cargar el archivo de películas');
+        }          
+      };
+      
 
     return (
         <Container component="main" maxWidth="xs">
@@ -199,6 +245,11 @@ const CreateMovieForm = () => {
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 {isEditing ? 'Editar Película' : 'Crear Película'}
             </Button>
+            { !isEditing &&
+                <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} color="success" onClick={() => uploadMovies()}>
+                    Cargar archivos
+                </Button>
+            }
             </Box>
         </Box>
         </Container>
