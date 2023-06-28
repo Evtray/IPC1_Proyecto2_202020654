@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import TheatersIcon from '@mui/icons-material/Theaters';
 import { useSelector } from 'react-redux';
 import { logoutUser, getUserMoviesPlaylist } from '../../api';
 import { useDispatch } from 'react-redux';
@@ -104,10 +104,10 @@ function MainMenu() {
     }
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" enableColorOnDark>
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <TheatersIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
                 variant="h6"
                 noWrap
@@ -122,7 +122,7 @@ function MainMenu() {
                 textDecoration: 'none',
                 }}
             >
-                LOGO
+                PELIS24
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -155,13 +155,13 @@ function MainMenu() {
                 }}
                 >
                 {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <MenuItem key={page} onClick={() => {handleCloseNavMenu(); redirectTo(page)}}>
                     <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                 ))}
                 </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <TheatersIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
                 variant="h5"
                 noWrap
@@ -178,7 +178,7 @@ function MainMenu() {
                 textDecoration: 'none',
                 }}
             >
-                LOGO
+                PELIS24
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
@@ -193,9 +193,9 @@ function MainMenu() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
+                <Tooltip title="Mi cuenta">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <AccountCircleIcon/>
                 </IconButton>
                 </Tooltip>
                 <Menu

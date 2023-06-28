@@ -13,13 +13,13 @@
             font-size: 20px;
             margin: 0;
             text-align: left;
-            color: grey;
+            color: white;
         }
         .comment-container {
             user-select: none;
             text-align: left;
             background: #5cfce657;
-            color: grey;
+            color: white;
             width: fit-content;
             padding: 10px;
             border-radius: 5px;
@@ -43,10 +43,11 @@
     .create-comment-input {
         display: flex;
         justify-content: space-between;
-        border-top: solid 1px lightgrey;
-        padding: 5px;
+        border-top: solid 1px white;
+        padding: 5px 0;
+        gap: 10px;
         input {
-            width: 200px;
+            width: 100%;
             font-size: 18px;
             border-radius: 5px;
             outline: none;
