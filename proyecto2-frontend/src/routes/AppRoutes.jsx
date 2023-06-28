@@ -12,6 +12,7 @@ import CreateMovieView from '../views/CreateMovieView/CreateMovieView';
 import EditMovieView from '../views/EditMovieView/EditMovieView';
 import UsersTableView from '../views/UsersTableView/UsersTableView';
 import MyAccountView from '../views/MyAccountView/MyAccountView';
+import MovieView from '../views/MovieView/MovieView';
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/my-account/:id" element={<MyAccountView />} />
+          <Route path="/movie/:id" element={<MovieView />} />
         </Route>
         <Route element={<AdminProtectedRoute />}>
           <Route path="/create-movie" element={<CreateMovieView />} />

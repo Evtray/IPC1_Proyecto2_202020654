@@ -1,0 +1,56 @@
+.movie-comments-container {
+    height: 320px;
+    display: grid;
+    grid-template-rows: 270px 50px;
+    padding: 20px;
+    .comments-container {
+        height: 100%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        h1 {
+            font-size: 20px;
+            margin: 0;
+            text-align: left;
+            color: grey;
+        }
+        .comment-container {
+            user-select: none;
+            text-align: left;
+            background: #5cfce657;
+            color: grey;
+            width: fit-content;
+            padding: 10px;
+            border-radius: 5px;
+        } & .created {
+            text-align: right;
+            margin-left: auto;
+        }
+        .comment-user {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .comment-text {
+            font-size: 18px;
+
+        }
+        .comment-date {
+            font-size: 12px;
+
+        }
+    }
+    .create-comment-input {
+        display: flex;
+        justify-content: space-between;
+        border-top: solid 1px lightgrey;
+        padding: 5px;
+        input {
+            width: 200px;
+            font-size: 18px;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+        }
+    }
+}

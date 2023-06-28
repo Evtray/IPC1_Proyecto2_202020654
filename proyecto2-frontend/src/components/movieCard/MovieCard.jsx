@@ -32,6 +32,10 @@ export default function MovieCard({key, movie}) {
     navigate(`/edit-movie/${movie.id}`);
   }
 
+  const onViewMovie = () => {
+    navigate(`/movie/${movie.id}`);
+  }
+
 
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -50,7 +54,7 @@ export default function MovieCard({key, movie}) {
       </CardContent>
       <CardActions>
         { !AUTH?.user?.is_admin && <Button size="small">Agregar a mi lista</Button> }
-        <Button size="small">Ver</Button>
+        <Button size="small" onClick={() => onViewMovie()}>Ver</Button>
         { AUTH?.user?.is_admin && <Button size="small" onClick={() => onEditMovie()}>Editar</Button> }
         { AUTH?.user?.is_admin && <Button size="small" onClick={() => onDeleteMovie()}>Eliminar</Button> }
       </CardActions>

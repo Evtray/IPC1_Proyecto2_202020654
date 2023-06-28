@@ -1,0 +1,31 @@
+.movie-video-component-container {
+    .video-container {
+    }
+    .movie-interactions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        .movie-info-container {
+            text-align: start;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            .movie-info-title {
+                font-size: 24px;
+                font-weight: bold;
+                margin: 10px 0;
+                color: #575050;
+            }
+            .movie-info-description {
+                font-size: 16px;
+                color: grey;
+                line-height: 15px;
+            }
+            .movie-details {
+                margin: 10px 0;
+                font-size: 14px;
+                color: #747171;
+            }
+        }        
+    }
+
+}

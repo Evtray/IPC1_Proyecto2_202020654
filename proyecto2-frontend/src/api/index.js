@@ -13,4 +13,5 @@ export {
     createMovie,
     deleteMovie,
     updateMovie,
+    publishComment,
 } from './movies';

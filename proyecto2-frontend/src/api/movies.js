@@ -45,18 +45,24 @@ export const deleteMovie = (movieUid) => {
 };
 
 export const updateMovie = (movieId, formData) => {
-  console.log(movieId, formData);
   return (dispatch) => {
     dispatch({ type: 'FETCH_MOVIES_REQUEST' }); // Dispatch the FETCH_MOVIES_REQUEST action to set loading state
     
     return axiosInstance
-      .put(`/movies/update/${movieId}`, formData)
-      .then((response) => {
+      .put(`/movies/update/${movieId}`, formData).then((response) => {
         dispatch({ type: 'FETCH_MOVIES_UPDATE', payload: response.data }); // Dispatch the FETCH_MOVIES_UPDATE action with the response data
         dispatch({ type: 'FETCH_MOVIES_SUCCESS' }); // Dispatch the FETCH_MOVIES_SUCCESS action
-      })
-      .catch((error) => {
+      }).catch((error) => {
         dispatch({ type: 'FETCH_MOVIES_FAILURE', payload: error.message }); // Dispatch the FETCH_MOVIES_FAILURE action with the error message
       });
   };
 };
+
+export const publishComment = (data) => {
+  return (dispatch) => {
+    return axiosInstance.post('/comments/create', data).then((response) => {
+      dispatch({ type: 'FETCH_MOVIES_COMMENT', payload: response.data }); // Dispatch the FETCH_MOVIES_COMMENT action with the response data
+    }).catch((error) => {
+    });
+  };
+}
