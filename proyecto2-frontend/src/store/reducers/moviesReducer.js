@@ -54,9 +54,7 @@ const moviesReducer = (state = initialState, action) => {
     case 'FETCH_MOVIES_COMMENT':
       const { user_uid, movie_uid, comment } = action.payload;
       const updatedMovieComments = state.movies.map(movie => {
-        console.log(movie.id, movie_uid, 'movie.id, movie_uid');
         if (movie.id === movie_uid) {
-          console.log('movie.id === movie_uid');
           const updatedComments = [...movie.comments, {
             id: action.payload.id,
             user_uid,
@@ -76,9 +74,6 @@ const moviesReducer = (state = initialState, action) => {
         loading: false,
         error: null
       };
-
-      
-
     default:
       return state;
   }

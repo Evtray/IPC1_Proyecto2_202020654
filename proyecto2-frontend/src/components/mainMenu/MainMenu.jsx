@@ -61,6 +61,9 @@ function MainMenu() {
             case 'Usuarios':
                 navigate('/users');
                 break;
+            case 'Películas':
+                navigate('/dashboard');
+                break;
             default:
                 break
         }

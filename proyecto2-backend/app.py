@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes.user import user_router
 from routes.comment import comment_router
 from routes.movie import movie_router
+from routes.userPlaylistMovie import user_movies_playlist_router
 
 app = FastAPI()
 
@@ -27,3 +28,5 @@ app.add_middleware(
 app.include_router(user_router)
 app.include_router(comment_router)
 app.include_router(movie_router)
+app.include_router(user_movies_playlist_router)
+
