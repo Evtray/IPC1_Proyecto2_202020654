@@ -48,15 +48,17 @@ const MovieComments = ({comments, onNewComment}) => {
                     )
                 })}
             </div>
-            <div className="create-comment-input">
-                <input 
-                    type="text" 
-                    placeholder="Escribe un comentario"
-                    value={newCommentValue}
-                    onChange={(e) => setNewCommentValue(e.target.value)}
-                />
-                <Button variant="outlined" onClick={() => {onNewComment(newCommentValue); setNewCommentValue('')}}>Comentar</Button>
-            </div>
+            { !AUTH.user.is_admin &&
+                <div className="create-comment-input">
+                    <input 
+                        type="text" 
+                        placeholder="Escribe un comentario"
+                        value={newCommentValue}
+                        onChange={(e) => setNewCommentValue(e.target.value)}
+                    />
+                    <Button variant="outlined" onClick={() => {onNewComment(newCommentValue); setNewCommentValue('')}}>Comentar</Button>
+                </div>
+            }
         </div>
     );
 }

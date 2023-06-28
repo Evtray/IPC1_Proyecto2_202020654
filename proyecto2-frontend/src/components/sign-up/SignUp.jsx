@@ -37,7 +37,7 @@ const SignUp = ({isAdminCreating}) => {
       password: data.get('password'),
       name: data.get('firstName'),
       lastname: data.get('lastName'),
-      is_admin: false,
+      is_admin: isAdminCreating ? true : false,
     }
     if(userParams.username === '' || userParams.password === '' || userParams.name === '' || userParams.lastname === '') {
       showToast('error', 'Todos los campos son obligatorios');
