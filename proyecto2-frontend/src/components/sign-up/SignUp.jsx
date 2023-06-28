@@ -17,7 +17,7 @@ import showToast from '../../helpers/showToast'
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+const SignUp = ({isAdminCreating}) => {
   let navigate = useNavigate();
   function onLogin() {
     navigate('/login');
@@ -46,7 +46,7 @@ export default function SignUp() {
     createUser(userParams).then((response) => {
       console.log(response);
       showToast('success', 'Usuario creado correctamente');
-      navigate('/login');
+      isAdminCreating ? navigate('/users') : navigate('/login');
     }).catch((error) => {
       console.log(error);
       if(error?.response?.status === 400) {
@@ -74,7 +74,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registrarse
+            {isAdminCreating ? 'Crear Usuario' : 'Registrarse'}
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -127,18 +127,23 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Registrarse
+              {isAdminCreating ? 'Crear Usuario' : 'Registrarse'}
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link variant="body2" onClick={() => onLogin()}>
-                  ¿Ya tienes una cuenta? Iniciar sesión
-                </Link>
+            {
+              !isAdminCreating &&
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link variant="body2" onClick={() => onLogin()}>
+                    ¿Ya tienes una cuenta? Iniciar sesión
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
+            }
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignUp;

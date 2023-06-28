@@ -14,6 +14,7 @@ import UsersTableView from '../views/UsersTableView/UsersTableView';
 import MyAccountView from '../views/MyAccountView/MyAccountView';
 import MovieView from '../views/MovieView/MovieView';
 import MoviesPlaylistView from '../views/MoviesPlaylistView/MoviesPlaylistView';
+import AdminCreateUser from '../views/AdminCreateUser/AdminCreateUser';
 
 const AppRoutes = () => {
   return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
           <Route path="/create-movie" element={<CreateMovieView />} />
           <Route path="/edit-movie/:id" element={<EditMovieView />} />
           <Route path="/users" element={<UsersTableView />} />
+          <Route path="/create-user" element={<AdminCreateUser />} />
         </Route>
       </Routes>
     </Router>
