@@ -5,8 +5,10 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { useSelector} from 'react-redux';
 
 function Header(props) {
+  const IS_AUTHENTICATED = useSelector(state => state.loggedIn);
   const { sections, title, onLogin } = props;
 
   return (
@@ -25,9 +27,15 @@ function Header(props) {
         </Typography>
         <IconButton>
         </IconButton>
-        <Button variant="outlined" size="small" onClick={() => onLogin()}>
-          Iniciar sesión
-        </Button>
+        {
+          IS_AUTHENTICATED ? 
+          <Button variant="outlined" size="small" onClick={() => onLogin()}>
+            Ver películas
+          </Button> :
+          <Button variant="outlined" size="small" onClick={() => onLogin()}>
+            Iniciar sesión
+          </Button>
+        }
       </Toolbar>
       <Toolbar
         component="nav"

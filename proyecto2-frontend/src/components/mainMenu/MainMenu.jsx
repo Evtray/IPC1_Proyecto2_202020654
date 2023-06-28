@@ -35,7 +35,7 @@ function MainMenu() {
         if(!isAdmin) {
             setPages(['Películas', 'Mi Playlist']);
         } else {
-            setPages(['Crear película', 'Usuarios', 'Administrar Películas']);
+            setPages(['Crear película', 'Administrar Películas', 'Usuarios']);
         }
     }, [AUTH]);
 
