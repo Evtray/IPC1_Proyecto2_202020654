@@ -8,12 +8,19 @@
   overflow: hidden;
   .css-1ri6ub7-MuiPaper-root-MuiCard-root {
     height: 340px;
+    width: 325px;
   }
   .css-r40f8v-MuiTypography-root {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+  .css-h93ljk-MuiTypography-root {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
   }
 }
 

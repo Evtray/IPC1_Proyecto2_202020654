@@ -96,6 +96,10 @@ def update_movie(movie_id: str, movie: Movie):
         update_fields["year"] = movie.year
     if movie.duration is not None:
         update_fields["duration"] = movie.duration
+    if movie.src is not None:
+        update_fields["src"] = movie.src
+    if movie.preview is not None:
+        update_fields["preview"] = movie.preview
 
     if update_fields:
         db.movies.update_one({"_id": movie_id}, {"$set": update_fields})

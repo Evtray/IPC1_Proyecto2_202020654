@@ -7,4 +7,7 @@ export {
 
 export {
     getMovies,
+    createMovie,
+    deleteMovie,
+    updateMovie,
 } from './movies';

@@ -8,6 +8,7 @@ const MainView = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('useEffect');
         dispatch(getMovies());
     }, [])
     

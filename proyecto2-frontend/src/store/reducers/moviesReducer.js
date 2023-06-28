@@ -2,38 +2,66 @@ const initialState = {
     movies: [],
     loading: false,
     error: null
-};
+  };
   
-const moviesReducer = (state = initialState, action) => {
+  const moviesReducer = (state = initialState, action) => {
     switch (action.type) {
-    case 'FETCH_MOVIES_REQUEST':
+      case 'FETCH_MOVIES_REQUEST':
         return {
-        ...state,
-        loading: true,
-        error: null
+          ...state,
+          loading: true,
+          error: null
         };
-    case 'FETCH_MOVIES_SUCCESS':
+      case 'FETCH_MOVIES_SUCCESS':
         return {
-        ...state,
-        movies: action.payload,
-        loading: false,
-        error: null
+          ...state,
+          movies: mergeMovies(state.movies, action.payload), // Merge the existing movies with the fetched movies
+          loading: false,
+          error: null
         };
-    case 'FETCH_MOVIES_FAILURE':
+      case 'FETCH_MOVIES_FAILURE':
         return {
-        ...state,
-        loading: false,
-        error: action.payload
+          ...state,
+          loading: false,
+          error: action.payload
         };
-    case 'FETCH_MOVIES_UPDATE':
+      case 'FETCH_MOVIES_NEW':
         return {
-        ...state,
-        movies: [...state.movies, action.payload]
+          ...state,
+          movies: [...state.movies, action.payload],
+          loading: false,
+          error: null
         };
-    default:
+      case 'FETCH_MOVIES_UPDATE':
+        const updatedMovies = state.movies.map(movie => {
+          if (movie.id === action.payload.id) {
+            return action.payload;
+          }
+          return movie;
+        });
+        return {
+          ...state,
+          movies: updatedMovies,
+          loading: false,
+          error: null
+        };
+      case 'FETCH_MOVIES_DELETE':
+        return {
+          ...state,
+          movies: state.movies.filter(movie => movie.id !== action.payload),
+          loading: false // Set loading to false after deleting the movie
+        };
+      default:
         return state;
     }
-};
+  };
   
-export default moviesReducer;
+  // Helper function to merge movies and avoid duplicates based on movie ID
+  const mergeMovies = (existingMovies, newMovies) => {
+    const existingIds = new Set(existingMovies.map(movie => movie.id));
+    const filteredNewMovies = newMovies.filter(movie => !existingIds.has(movie.id));
+    return [...existingMovies, ...filteredNewMovies];
+  };
+  
+  export default moviesReducer;
   

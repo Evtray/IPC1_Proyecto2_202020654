@@ -7,14 +7,31 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
+import { deleteMovie } from '../../api';
+import { useDispatch } from 'react-redux';
+import showToast from '../../helpers/showToast';
+import { useNavigate } from 'react-router-dom';
 
 export default function MovieCard({key, movie}) {
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
   const AUTH = useSelector(state => state.auth);
-  
-  useEffect(() => {
-    console.log('first', movie)
-  }, [])
-  
+
+  const onDeleteMovie = () => {
+    console.log('delete', movie)
+    dispatch(deleteMovie(movie.id)).then(() => {
+      console.log('deleted')
+      showToast('success', 'Película eliminada correctamente')
+    }).catch((error) => {
+      console.log('error')
+      showToast('error', 'Error al eliminar la película')
+    });
+  }
+
+  const onEditMovie = () => {
+    navigate(`/edit-movie/${movie.id}`);
+  }
+
 
   return (
     <Card sx={{ maxWidth: 345 }} >
@@ -34,8 +51,8 @@ export default function MovieCard({key, movie}) {
       <CardActions>
         { !AUTH?.user?.is_admin && <Button size="small">Agregar a mi lista</Button> }
         <Button size="small">Ver</Button>
-        { AUTH?.user?.is_admin && <Button size="small">Editar</Button> }
-        { AUTH?.user?.is_admin && <Button size="small">Eliminar</Button> }
+        { AUTH?.user?.is_admin && <Button size="small" onClick={() => onEditMovie()}>Editar</Button> }
+        { AUTH?.user?.is_admin && <Button size="small" onClick={() => onDeleteMovie()}>Eliminar</Button> }
       </CardActions>
     </Card>
   );

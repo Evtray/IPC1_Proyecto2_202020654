@@ -16,10 +16,12 @@ import { useSelector } from 'react-redux';
 import { logoutUser } from '../../api';
 import { useDispatch } from 'react-redux';
 import showToast from '../../helpers/showToast'
+import { useNavigate } from 'react-router-dom';
 
 const settings = ['Mi cuenta', 'Cerrar sesión'];
 
 function MainMenu() {
+    let navigate = useNavigate();
     const dispatch = useDispatch();
     const IS_AUTHENTICATED = useSelector(state => state.loggedIn);
     const AUTH = useSelector(state => state.auth);
@@ -47,6 +49,19 @@ function MainMenu() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const redirectTo = (page) => {
+        switch (page) {
+            case 'Crear película':
+                navigate('/create-movie');
+                break;  
+            case 'Administrar Películas':
+                navigate('/dashboard');
+                break;
+            default:
+                break
+        }
+    }
 
     const handleCloseUserMenu = (option) => {
         setAnchorElUser(null);
@@ -152,7 +167,7 @@ function MainMenu() {
                 {pages.map((page) => (
                 <Button
                     key={page}
-                    onClick={handleCloseNavMenu}
+                    onClick={() => redirectTo(page)}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                     {page}
