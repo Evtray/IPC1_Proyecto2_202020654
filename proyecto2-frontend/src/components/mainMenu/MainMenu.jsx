@@ -58,6 +58,9 @@ function MainMenu() {
             case 'Administrar Películas':
                 navigate('/dashboard');
                 break;
+            case 'Usuarios':
+                navigate('/users');
+                break;
             default:
                 break
         }

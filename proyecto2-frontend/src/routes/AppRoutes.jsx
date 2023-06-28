@@ -10,6 +10,7 @@ import MainMenu from '../components/mainMenu/MainMenu';
 import RecoverPasswordView from '../views/RecoverPasswordView/RecoverPassword';
 import CreateMovieView from '../views/CreateMovieView/CreateMovieView';
 import EditMovieView from '../views/EditMovieView/EditMovieView';
+import UsersTableView from '../views/UsersTableView/UsersTableView';
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route element={<AdminProtectedRoute />}>
           <Route path="/create-movie" element={<CreateMovieView />} />
           <Route path="/edit-movie/:id" element={<EditMovieView />} />
+          <Route path="/users" element={<UsersTableView />} />
         </Route>
       </Routes>
     </Router>

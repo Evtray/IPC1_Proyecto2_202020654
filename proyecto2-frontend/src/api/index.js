@@ -3,6 +3,8 @@ export {
     loginUser,
     logoutUser,
     recoverPassword,
+    getUsers,
+    deleteUser,
 } from './users';
 
 export {
