@@ -48,14 +48,14 @@ def create_user_movies_playlist(user_movie: UserPlaylistMovie):
     return userPlaylistMovieEntity(created_user_movie)
 
 
-@user_movies_playlist_router.delete("/userMoviesPlaylist/{id}")
-def delete_user_movies_playlist(id: str):
-    # Check if the ID is a valid ObjectId
-    if not ObjectId.is_valid(id):
-        raise HTTPException(status_code=400, detail="Invalid user movie ID")
+@user_movies_playlist_router.delete("/userMoviesPlaylist")
+def delete_user_movies_playlist(user_uid: str = Query(...), movie_uid: str = Query(...)):
+    # Convert user_uid and movie_uid to ObjectId
+    user_uid = ObjectId(user_uid)
+    movie_uid = ObjectId(movie_uid)
 
     # Delete the user movie from the database
-    result = db.user_movies_playlist.delete_one({"_id": ObjectId(id)})
+    result = db.user_movies_playlist.delete_one({"user_uid": user_uid, "movie_uid": movie_uid})
 
     # Check if the user movie was found and deleted
     if result.deleted_count == 0:

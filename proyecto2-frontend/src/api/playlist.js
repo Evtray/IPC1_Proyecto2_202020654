@@ -19,26 +19,35 @@ export const getUserMoviesPlaylist = (userId) => {
 };
 
   
-  export const addUserMovieToPlaylist = (userMovie) => {
-    return (dispatch) => {
-      axiosInstance.post('/userMoviesPlaylist', userMovie)
+export const addUserMovieToPlaylist = (userMovie) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axiosInstance
+        .post('/userMoviesPlaylist', userMovie)
         .then((response) => {
-          dispatch({ type: 'ADD_USER_MOVIE_PLAYLIST', payload: response.data }); // Dispatch the ADD_USER_MOVIE_PLAYLIST action with the response data
+          dispatch({ type: 'ADD_USER_MOVIE_PLAYLIST', payload: response.data });
+          resolve(); // Resolve the promise after dispatching the action
         })
         .catch((error) => {
-          // Handle error if needed
+          reject(error); // Reject the promise with the error
         });
-    };
+    });
   };
+};
+
   
-  export const removeUserMovieFromPlaylist = (userMovieId) => {
-    return (dispatch) => {
-      axiosInstance.delete(`/userMoviesPlaylist/${userMovieId}`)
+export const removeUserMovieFromPlaylist = (movie_uid, user_uid) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axiosInstance
+        .delete(`/userMoviesPlaylist?user_uid=${user_uid}&movie_uid=${movie_uid}`)
         .then(() => {
-          dispatch({ type: 'REMOVE_USER_MOVIE_PLAYLIST', payload: userMovieId }); // Dispatch the REMOVE_USER_MOVIE_PLAYLIST action with the userMovieId
+          dispatch({ type: 'REMOVE_USER_MOVIE_PLAYLIST', payload: movie_uid });
+          resolve(); // Resolve the promise after dispatching the action
         })
         .catch((error) => {
-          // Handle error if needed
+          reject(error); // Reject the promise with the error
         });
-    };
+    });
   };
+};

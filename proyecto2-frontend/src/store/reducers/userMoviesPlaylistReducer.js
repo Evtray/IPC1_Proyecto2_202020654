@@ -35,7 +35,9 @@ const initialState = {
       case 'REMOVE_USER_MOVIE_PLAYLIST':
         return {
           ...state,
-          userMoviesPlaylist: state.userMoviesPlaylist.filter(userMovie => userMovie.id !== action.payload),
+          userMoviesPlaylist: state.userMoviesPlaylist.filter(
+            userMovie => userMovie.movie_uid !== action.payload
+          ),
           loading: false,
           error: null
         };
